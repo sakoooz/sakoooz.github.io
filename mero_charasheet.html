@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f0efe7">
+<title>メロさ‼️ CHARACTER SHEET</title>
+<style>
+:root{
+  --olive:#638D2D; --ivory:#F0EFE7; --taupe:#AD9268; --sage:#B2C9C6;
+  --ink:#30352a; --muted:#74776d; --line:#e2e1d7; --white:#fff;
+  --olive-pale:#edf3e5; --sage-pale:#edf4f2; --taupe-pale:#f5f0e7;
+  --shadow:0 8px 24px rgba(61,69,45,.07);
+}
+*{box-sizing:border-box}
+html{background:var(--ivory);scroll-behavior:smooth}
+body{margin:0;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;line-height:1.55}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #b2c9c6;outline-offset:2px}
+.app{max-width:760px;margin:0 auto;min-height:100vh;padding:0 16px 100px}
+.topbar{padding:24px 2px 16px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.eyebrow{font-size:11px;letter-spacing:.15em;font-weight:800;color:var(--olive)}
+h1{font-size:clamp(23px,6vw,31px);line-height:1.15;margin:5px 0 5px;letter-spacing:-.04em}
+.subtitle{margin:0;color:var(--muted);font-size:13px}
+.round-icon{border:1px solid var(--line);background:#fff;border-radius:50%;width:42px;height:42px;display:grid;place-items:center;color:var(--olive);flex-shrink:0}
+.toolbar{display:flex;gap:8px;align-items:center;margin:8px 0 16px}
+.search-wrap{position:relative;flex:1}
+.search-wrap span{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.search{width:100%;border:1px solid var(--line);border-radius:14px;background:#fff;padding:12px 12px 12px 38px;min-width:0}
+.btn{border:0;border-radius:13px;padding:11px 14px;font-weight:750;display:inline-flex;align-items:center;justify-content:center;gap:7px;transition:transform .12s,filter .12s;min-height:44px}
+.btn:active{transform:scale(.98)}
+.btn-primary{background:var(--olive);color:#fff;box-shadow:0 4px 10px #638d2d25}
+.btn-soft{background:var(--olive-pale);color:#46691e}
+.btn-outline{background:#fff;border:1px solid var(--line);color:var(--ink)}
+.btn-taupe{background:var(--taupe-pale);color:#705a39}
+.btn-danger{background:#f8ece7;color:#984b38}
+.btn-small{min-height:36px;padding:8px 11px;font-size:12px;border-radius:10px}
+.section-heading{display:flex;justify-content:space-between;align-items:center;margin:20px 2px 11px;gap:10px}
+.section-heading h2{font-size:16px;margin:0}
+.count{font-size:12px;color:var(--muted)}
+.card-list{display:grid;grid-template-columns:1fr;gap:10px}
+.character-card{background:#fff;border:1px solid #e9e8df;border-radius:19px;padding:15px;box-shadow:var(--shadow);display:flex;gap:12px;align-items:flex-start;position:relative}
+.card-mark{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;background:var(--olive-pale);color:var(--olive);font-size:21px;flex-shrink:0}
+.character-card:nth-child(3n+2) .card-mark{background:var(--sage-pale);color:#557d77}
+.character-card:nth-child(3n) .card-mark{background:var(--taupe-pale);color:#94784d}
+.card-main{flex:1;min-width:0}
+.card-title{font-size:16px;font-weight:800;overflow-wrap:anywhere;margin:1px 0 4px}
+.card-concept{font-size:12px;color:var(--muted);margin:0 0 9px;white-space:pre-wrap;overflow-wrap:anywhere}
+.card-meta{display:flex;flex-wrap:wrap;gap:6px}
+.pill{font-size:11px;border-radius:999px;padding:4px 8px;background:#f4f3ed;color:#686b61}
+.pill.green{background:var(--olive-pale);color:#4d7124}
+.card-actions{display:flex;gap:5px;margin-top:10px;flex-wrap:wrap}
+.card-open{position:absolute;right:13px;top:13px;border:0;background:transparent;color:#9a9b91;font-size:20px;padding:0 2px}
+.empty{background:#fff;border:1px dashed #d3d3c5;border-radius:20px;text-align:center;padding:30px 20px;color:var(--muted)}
+.empty .symbol{font-size:32px;margin-bottom:8px}
+.empty strong{display:block;color:var(--ink);margin-bottom:5px}
+.panel{background:#fff;border:1px solid #e7e6dc;border-radius:20px;padding:17px;box-shadow:var(--shadow);margin-bottom:12px}
+.editor-head{display:flex;align-items:center;gap:10px;margin:15px 0}
+.back{border:1px solid var(--line);background:#fff;border-radius:12px;width:43px;height:43px;font-size:22px;color:var(--olive)}
+.editor-title{flex:1;min-width:0}
+.editor-title h2{font-size:21px;margin:0;overflow-wrap:anywhere}
+.editor-title p{font-size:12px;color:var(--muted);margin:2px 0 0}
+.field{margin:13px 0}
+label,.field-label{display:block;font-size:13px;font-weight:750;margin:0 0 6px}
+.hint{font-size:11px;color:var(--muted);font-weight:400;margin-left:4px}
+input[type=text],textarea,select{width:100%;border:1px solid #deded3;border-radius:12px;background:#fff;padding:12px;color:var(--ink);min-width:0}
+textarea{resize:vertical;min-height:84px;line-height:1.6}
+input::placeholder,textarea::placeholder{color:#a2a398}
+.accordion{border:1px solid var(--line);border-radius:15px;margin:9px 0;background:#fff;overflow:hidden}
+.accordion summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px;font-weight:800;font-size:14px}
+.accordion summary::-webkit-details-marker{display:none}
+.accordion summary:after{content:"＋";color:var(--olive);font-size:18px;font-weight:500}
+.accordion[open] summary:after{content:"−"}
+.accordion .inner{padding:0 14px 13px;border-top:1px solid #f0efe8}
+.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.choice{display:flex;align-items:flex-start;gap:8px;border:1px solid var(--line);border-radius:11px;padding:10px;font-size:12px;font-weight:500;background:#fff;min-height:42px}
+.choice input{accent-color:var(--olive);margin-top:3px;flex-shrink:0}
+.choice:has(input:checked){background:var(--olive-pale);border-color:#c7d8ad}
+.repeat-row{display:flex;gap:7px;margin:8px 0}
+.repeat-row input{flex:1}
+.remove-row{border:1px solid var(--line);background:#fff;color:#8d5c4c;border-radius:10px;width:42px;flex-shrink:0}
+.inline-add{background:none;border:1px dashed #c7c8ba;color:#557a2c;border-radius:10px;padding:9px 12px;font-size:12px;font-weight:750;width:100%}
+.sticky-actions{position:fixed;bottom:0;left:0;right:0;z-index:10;background:#f0efe7ed;backdrop-filter:blur(14px);border-top:1px solid #deded4;padding:10px 16px calc(10px + env(safe-area-inset-bottom));}
+.sticky-inner{max-width:760px;margin:0 auto;display:flex;gap:8px}
+.sticky-inner .btn{flex:1}
+.toast{position:fixed;bottom:calc(82px + env(safe-area-inset-bottom));left:50%;transform:translate(-50%,12px);opacity:0;pointer-events:none;background:#30352a;color:#fff;padding:11px 16px;border-radius:999px;font-size:13px;box-shadow:var(--shadow);transition:all .2s;z-index:20;max-width:calc(100vw - 30px);text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.hidden{display:none!important}
+.file-actions{display:flex;flex-wrap:wrap;gap:8px}
+.file-note{font-size:12px;color:var(--muted);margin:8px 0 0}
+#fileInput{display:none}
+.preview{white-space:pre-wrap;overflow-wrap:anywhere;background:#f8f8f3;border:1px solid var(--line);border-radius:12px;padding:13px;font-size:12px;max-height:300px;overflow:auto}
+.modal-backdrop{position:fixed;inset:0;background:#2228;z-index:30;display:flex;align-items:center;justify-content:center;padding:20px}
+.modal{background:#fff;border-radius:20px;padding:20px;width:min(100%,420px);box-shadow:0 20px 70px #0003}
+.modal h3{margin:0 0 8px}
+.modal p{font-size:13px;color:var(--muted);margin:0 0 18px}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end}
+.footer-note{text-align:center;color:#96988d;font-size:11px;margin:22px 0 0}
+@media(min-width:560px){.app{padding-left:24px;padding-right:24px}.card-list{grid-template-columns:1fr 1fr}.character-card{min-height:145px}.choice-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:360px){.app{padding-left:11px;padding-right:11px}.topbar{padding-top:18px}.btn{padding-left:10px;padding-right:10px}.choice-grid{grid-template-columns:1fr 1fr}.panel{padding:13px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div>
+      <div class="eyebrow">MY CREATIVE TOOL</div>
+      <h1>メロさ‼️<br>CHARACTER SHEET</h1>
+      <p class="subtitle">キャラの魅力を、設計して残す。</p>
+    </div>
+    <button class="round-icon" id="openData" aria-label="データ管理" title="データ管理">↗</button>
+  </header>
+
+  <main id="listView">
+    <div class="toolbar">
+      <div class="search-wrap"><span>⌕</span><input class="search" id="searchInput" type="text" placeholder="キャラ名・コンセプトで検索" aria-label="キャラ検索"></div>
+      <button class="btn btn-primary" id="addCharacter">＋ 追加</button>
+    </div>
+    <div class="section-heading"><h2>キャラクター一覧</h2><span class="count" id="characterCount">0 characters</span></div>
+    <div id="cardList" class="card-list"></div>
+    <div class="footer-note">データはこのブラウザ内に保存されます。JSONバックアップも忘れずに。</div>
+  </main>
+
+  <main id="editorView" class="hidden">
+    <div class="editor-head">
+      <button class="back" id="backToList" aria-label="一覧に戻る">‹</button>
+      <div class="editor-title"><h2 id="editorHeading">新しいキャラ</h2><p id="saveStatus">編集内容は自動保存されます</p></div>
+      <button class="btn btn-soft btn-small" id="previewButton">コピー確認</button>
+    </div>
+    <div class="panel">
+      <div class="field"><label for="charName">キャラクター名 <span class="hint">必須ではありません</span></label><input type="text" id="charName" placeholder="名前・仮名"></div>
+      <div class="field"><label for="concept">基本コンセプト</label><textarea id="concept" placeholder="どんな人物で、どんな魅力を目指す？" rows="3"></textarea></div>
+      <div class="field"><label for="summary">一覧に表示する一言（任意）</label><input type="text" id="summary" placeholder="短い紹介文"></div>
+    </div>
+
+    <details class="accordion" open>
+      <summary>01　メロさの核・メイン要素</summary>
+      <div class="inner">
+        <p class="hint" style="margin:12px 0">特に強く打ち出したい魅力を3つまで。自由記述でもOK。</p>
+        <div id="mainElements"></div>
+        <button class="inline-add" data-add-row="mainElements">＋ 要素を追加</button>
+        <div class="field"><label for="core">このキャラの魅力の核</label><textarea id="core" placeholder="この人物だからこそ成立する魅力は？"></textarea></div>
+      </div>
+    </details>
+
+    <details class="accordion">
+      <summary>02　外見・ビジュアル</summary>
+      <div class="inner">
+        <div class="field"><label>外見の魅力（複数選択可）</label><div class="choice-grid" data-choice-group="appearance">
+          <label class="choice"><input type="checkbox" value="端正で華やか">端正で華やか</label>
+          <label class="choice"><input type="checkbox" value="ワイルドで男らしい">ワイルドで男らしい</label>
+          <label class="choice"><input type="checkbox" value="中性的で繊細">中性的で繊細</label>
+          <label class="choice"><input type="checkbox" value="筋肉質・大柄">筋肉質・大柄</label>
+          <label class="choice"><input type="checkbox" value="細身・華奢">細身・華奢</label>
+          <label class="choice"><input type="checkbox" value="長身・大きな手">長身・大きな手</label>
+          <label class="choice"><input type="checkbox" value="低音・ハスキーボイス">低音・ハスキーボイス</label>
+          <label class="choice"><input type="checkbox" value="眼鏡・ピアス・刺青">眼鏡・ピアス・刺青</label>
+          <label class="choice"><input type="checkbox" value="傷跡・身体的特徴">傷跡・身体的特徴</label>
+          <label class="choice"><input type="checkbox" value="年齢を重ねた渋さ">年齢を重ねた渋さ</label>
+          <label class="choice"><input type="checkbox" value="服装・所作の美しさ">服装・所作の美しさ</label>
+          <label class="choice"><input type="checkbox" value="表情の変化">表情の変化</label>
+        </div></div>
+        <div class="field"><label for="appearanceNotes">具体的な外見・描写</label><textarea id="appearanceNotes" placeholder="外見・声・衣装・仕草など"></textarea></div>
+      </div>
+    </details>
+
+    <details class="accordion">
+      <summary>03　性格・人格</summary>
+      <div class="inner">
+        <div class="field"><label>性格の要素（複数選択可）</label><div class="choice-grid" data-choice-group="personality">
+          <label class="choice"><input type="checkbox" value="誰にでも優しい">誰にでも優しい</label>
+          <label class="choice"><input type="checkbox" value="特定の相手にだけ優しい">特定の相手にだけ優しい</label>
+          <label class="choice"><input type="checkbox" value="クール・感情を隠す">クール・感情を隠す</label>
+          <label class="choice"><input type="checkbox" value="明るく人懐っこい">明るく人懐っこい</label>
+          <label class="choice"><input type="checkbox" value="自信家・余裕がある">自信家・余裕がある</label>
+          <label class="choice"><input type="checkbox" value="不器用・口下手">不器用・口下手</label>
+          <label class="choice"><input type="checkbox" value="誠実・約束を守る">誠実・約束を守る</label>
+          <label class="choice"><input type="checkbox" value="毒舌・観察眼がある">毒舌・観察眼がある</label>
+          <label class="choice"><input type="checkbox" value="面倒見がよい">面倒見がよい</label>
+          <label class="choice"><input type="checkbox" value="甘え上手・頼るのが得意">甘え上手・頼るのが得意</label>
+          <label class="choice"><input type="checkbox" value="プライドが高い">プライドが高い</label>
+          <label class="choice"><input type="checkbox" value="独自の美学・価値観">独自の美学・価値観</label>
+        </div></div>
+        <div class="field"><label for="personalityNotes">性格・価値観の補足</label><textarea id="personalityNotes" placeholder="長所・欠点・譲れないもの"></textarea></div>
+      </div>
+    </details>
+
+    <details class="accordion">
+      <summary>04　恋愛表現・愛情の示し方</summary>
+      <div class="inner">
+        <div class="field"><label>恋愛表現（複数選択可）</label><div class="choice-grid" data-choice-group="romance">
+          <label class="choice"><input type="checkbox" value="愛情を言葉で伝える">愛情を言葉で伝える</label>
+          <label class="choice"><input type="checkbox" value="行動で愛情を示す">行動で愛情を示す</label>
+          <label class="choice"><input type="checkbox" value="積極的に口説く">積極的に口説く</label>
+          <label class="choice"><input type="checkbox" value="恋愛では不器用">恋愛では不器用</label>
+          <label class="choice"><input type="checkbox" value="好きな相手の前で照れる">好きな相手の前で照れる</label>
+          <label class="choice"><input type="checkbox" value="普段と変わらず余裕がある">普段と変わらず余裕がある</label>
+          <label class="choice"><input type="checkbox" value="甘える・弱音を吐く">甘える・弱音を吐く</label>
+          <label class="choice"><input type="checkbox" value="嫉妬を言葉にする">嫉妬を言葉にする</label>
+          <label class="choice"><input type="checkbox" value="嫉妬を隠して態度に漏れる">嫉妬を隠して態度に漏れる</label>
+          <label class="choice"><input type="checkbox" value="相手の自由を尊重する">相手の自由を尊重する</label>
+        </div></div>
+        <div class="field"><label for="romanceNotes">このキャラらしい愛情表現</label><textarea id="romanceNotes" placeholder="どんなとき、どう愛情を示す？"></textarea></div>
+      </div>
+    </details>
+
+    <details class="accordion">
+      <summary>05　ギャップ・意外性</summary>
+      <div class="inner">
+        <div class="field"><label>ギャップの候補</label><div class="choice-grid" data-choice-group="gap">
+          <label class="choice"><input type="checkbox" value="怖そうなのに優しい">怖そうなのに優しい</label>
+          <label class="choice"><input type="checkbox" value="完璧そうなのに不器用">完璧そうなのに不器用</label>
+          <label class="choice"><input type="checkbox" value="強気なのに恋愛では弱い">強気なのに恋愛では弱い</label>
+          <label class="choice"><input type="checkbox" value="軽薄そうなのに誠実">軽薄そうなのに誠実</label>
+          <label class="choice"><input type="checkbox" value="無口なのに好きな話では饒舌">無口なのに好きな話では饒舌</label>
+          <label class="choice"><input type="checkbox" value="冷静な人が動揺する">冷静な人が動揺する</label>
+          <label class="choice"><input type="checkbox" value="普段は厳しいが特定の相手に甘い">普段は厳しいが特定の相手に甘い</label>
+          <label class="choice"><input type="checkbox" value="ギャップより一貫性が魅力">ギャップより一貫性が魅力</label>
+        </div></div>
+        <div class="field"><label for="gapNotes">ギャップが見える場面</label><textarea id="gapNotes" placeholder="普段と何がどう違う？"></textarea></div>
+      </div>
+    </details>
+
+    <details class="accordion">
+      <summary>06　執着・独占欲・危うさ</summary>
+      <div class="inner">
+        <div class="field"><label>要素（複数選択可）</label><div class="choice-grid" data-choice-group="obsession">
+          <label class="choice"><input type="checkbox" value="嫉妬を隠さない">嫉妬を隠さない</label>
+          <label class="choice"><input type="checkbox" value="独占欲を明言する">独占欲を明言する</label>
+          <label class="choice"><input type="checkbox" value="長い時間をかけて執着する">長い時間をかけて執着する</label>
+          <label class="choice"><input type="checkbox" value="相手のために地位を失ってもよい">相手のために地位を失ってもよい</label>
+          <label class="choice"><input type="checkbox" value="愛のためでも信念は曲げない">愛のためでも信念は曲げない</label>
+          <label class="choice"><input type="checkbox" value="欲求を理性で自制する">欲求を理性で自制する</label>
+          <label class="choice"><input type="checkbox" value="愛情と支配欲が曖昧">愛情と支配欲が曖昧</label>
+          <label class="choice"><input type="checkbox" value="執着していても自由を尊重する">執着していても自由を尊重する</label>
+        </div></div>
+        <div class="field"><label for="obsessionNotes">執着の発現条件・境界線</label><textarea id="obsessionNotes" placeholder="何が引き金になり、どこで自制する？"></textarea></div>
+      </div>
+    </details>
+
+    <details class="accordion">
+      <summary>07　関係性・信念・力関係</summary>
+      <div class="inner">
+        <div class="field"><label>関係性・行動原理</label><div class="choice-grid" data-choice-group="relationship">
+          <label class="choice"><input type="checkbox" value="誰にも見せない顔を見せる">誰にも見せない顔を見せる</label>
+          <label class="choice"><input type="checkbox" value="反発から信頼へ変わる">反発から信頼へ変わる</label>
+          <label class="choice"><input type="checkbox" value="敵同士でも認め合う">敵同士でも認め合う</label>
+          <label class="choice"><input type="checkbox" value="対等で自立した関係">対等で自立した関係</label>
+          <label class="choice"><input type="checkbox" value="相手をリードする">相手をリードする</label>
+          <label class="choice"><input type="checkbox" value="相手にリードされる">相手にリードされる</label>
+          <label class="choice"><input type="checkbox" value="相手にだけは弱い">相手にだけは弱い</label>
+          <label class="choice"><input type="checkbox" value="信念を貫き孤立する">信念を貫き孤立する</label>
+          <label class="choice"><input type="checkbox" value="間違いを認め修正できる">間違いを認め修正できる</label>
+        </div></div>
+        <div class="field"><label for="relationshipNotes">二人の関係性・信念の詳細</label><textarea id="relationshipNotes" placeholder="関係性の変化、譲れない一線など"></textarea></div>
+      </div>
+    </details>
+
+    <details class="accordion">
+      <summary>08　具体的な場面・メロさの実装</summary>
+      <div class="inner">
+        <div class="field"><label for="scenes">読者が実際に目撃する行動・台詞</label><textarea id="scenes" rows="5" placeholder="設定だけで終わらせず、場面として書く。&#10;例：相手が以前こぼした苦手な食べ物を覚えていて、黙って別の皿を頼む。"></textarea></div>
+        <div class="field"><label for="conditions">条件付きで刺さる要素</label><textarea id="conditions" placeholder="どんな状況・関係性だから魅力が生まれる？"></textarea></div>
+        <div class="field"><label for="synergy">ギャップ・相乗効果</label><textarea id="synergy" placeholder="組み合わせると魅力が増す属性は？"></textarea></div>
+      </div>
+    </details>
+
+    <details class="accordion">
+      <summary>09　弱さ・過去・人間臭さ</summary>
+      <div class="inner">
+        <div class="field"><label>要素（複数選択可）</label><div class="choice-grid" data-choice-group="vulnerability">
+          <label class="choice"><input type="checkbox" value="弱みを隠している">弱みを隠している</label>
+          <label class="choice"><input type="checkbox" value="特定の相手にだけ弱音を吐く">特定の相手にだけ弱音を吐く</label>
+          <label class="choice"><input type="checkbox" value="助けを求めるのが苦手">助けを求めるのが苦手</label>
+          <label class="choice"><input type="checkbox" value="過去への後悔がある">過去への後悔がある</label>
+          <label class="choice"><input type="checkbox" value="失敗から立ち直る">失敗から立ち直る</label>
+          <label class="choice"><input type="checkbox" value="弱さを克服しきれない">弱さを克服しきれない</label>
+          <label class="choice"><input type="checkbox" value="最後まで孤独を貫く">最後まで孤独を貫く</label>
+          <label class="choice"><input type="checkbox" value="欠点を自覚し努力する">欠点を自覚し努力する</label>
+        </div></div>
+        <div class="field"><label for="vulnerabilityNotes">弱さ・過去の扱い</label><textarea id="vulnerabilityNotes" placeholder="何を隠し、どう向き合う？"></textarea></div>
+      </div>
+    </details>
+
+    <details class="accordion">
+      <summary>10　能力・社会的な魅力</summary>
+      <div class="inner">
+        <div class="field"><label>要素（複数選択可）</label><div class="choice-grid" data-choice-group="ability">
+          <label class="choice"><input type="checkbox" value="圧倒的な実力">圧倒的な実力</label>
+          <label class="choice"><input type="checkbox" value="努力家">努力家</label>
+          <label class="choice"><input type="checkbox" value="有能だが誇示しない">有能だが誇示しない</label>
+          <label class="choice"><input type="checkbox" value="リーダーシップ">リーダーシップ</label>
+          <label class="choice"><input type="checkbox" value="仲間から信頼されている">仲間から信頼されている</label>
+          <label class="choice"><input type="checkbox" value="独自の美学・哲学">独自の美学・哲学</label>
+          <label class="choice"><input type="checkbox" value="カリスマ性">カリスマ性</label>
+          <label class="choice"><input type="checkbox" value="善悪の基準が独特">善悪の基準が独特</label>
+        </div></div>
+        <div class="field"><label for="abilityNotes">能力・仕事・信念の詳細</label><textarea id="abilityNotes" placeholder="何ができ、何を大切にしている？"></textarea></div>
+      </div>
+    </details>
+
+    <details class="accordion">
+      <summary>11　避けたい方向性・注意点</summary>
+      <div class="inner">
+        <div class="field"><label for="avoidDirections">このキャラでは避けたいこと</label><textarea id="avoidDirections" rows="4" placeholder="キャラらしさが崩れる行動、安易に使いたくない展開など"></textarea></div>
+        <div class="field"><label for="notes">その他のメモ</label><textarea id="notes" placeholder="自由メモ"></textarea></div>
+      </div>
+    </details>
+  </main>
+
+  <section id="dataView" class="hidden">
+    <div class="editor-head">
+      <button class="back" id="backFromData" aria-label="戻る">‹</button>
+      <div class="editor-title"><h2>データ管理</h2><p>JSONでバックアップ・復元</p></div>
+    </div>
+    <div class="panel">
+      <h3 style="margin:0 0 6px">JSONバックアップ</h3>
+      <p class="subtitle" style="margin-bottom:14px">全キャラのデータを1つのファイルに保存します。</p>
+      <div class="file-actions">
+        <button class="btn btn-primary" id="exportJson">↓ JSONを書き出す</button>
+        <button class="btn btn-outline" id="importJson">↑ JSONを読み込む</button>
+      </div>
+      <input type="file" id="fileInput" accept=".json,application/json">
+      <p class="file-note">読み込み時は「既存データに追加」または「すべて置き換え」を選べます。念のため、先に書き出しておくのがおすすめです。</p>
+    </div>
+    <div class="panel">
+      <h3 style="margin:0 0 6px">保存について</h3>
+      <p class="subtitle">編集中の内容は、このブラウザの保存領域に自動保存されます。ブラウザのデータを消去すると失われる場合があるため、定期的にJSONを書き出してください。データをサーバーへ送信する機能はありません。</p>
+    </div>
+  </section>
+</div>
+
+<div class="sticky-actions hidden" id="editorActions">
+  <div class="sticky-inner">
+    <button class="btn btn-outline" id="copyAll">▣ すべてコピー</button>
+    <button class="btn btn-primary" id="copyAppeal">✦ メロさ要素をコピー</button>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="modal-backdrop hidden" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <h3 id="modalTitle">確認</h3>
+    <p id="modalMessage"></p>
+    <div class="modal-actions" id="modalActions"></div>
+  </div>
+</div>
+
+<script>
+(() => {
+  "use strict";
+  const STORAGE_KEY = "meroCharacterSheet.v1";
+  const $ = (s, root=document) => root.querySelector(s);
+  const $$ = (s, root=document) => [...root.querySelectorAll(s)];
+  const fields = [
+    "charName","concept","summary","core","appearanceNotes","personalityNotes","romanceNotes",
+    "gapNotes","obsessionNotes","relationshipNotes","scenes","conditions","synergy",
+    "vulnerabilityNotes","abilityNotes","avoidDirections","notes"
+  ];
+  const groups = ["appearance","personality","romance","gap","obsession","relationship","vulnerability","ability"];
+  let characters = [];
+  let currentId = null;
+  let dirtyTimer = null;
+  let toastTimer = null;
+  let lastView = "list";
+
+  function uid(){ return "c_" + Date.now().toString(36) + "_" + Math.random().toString(36).slice(2,9); }
+  function blankCharacter(){
+    const obj = {id:uid(),createdAt:new Date().toISOString(),updatedAt:new Date().toISOString(),appealElements:["","",""]};
+    fields.forEach(k=>obj[k==="charName"?"name":k==="concept"?"concept":k==="summary"?"summary":k]="");
+    obj.name=""; obj.concept=""; obj.summary="";
+    groups.forEach(k=>obj[k]=[]);
+    return obj;
+  }
+  function load(){
+    try{
+      const raw=localStorage.getItem(STORAGE_KEY);
+      if(raw){ const parsed=JSON.parse(raw); if(Array.isArray(parsed)) characters=parsed; else if(Array.isArray(parsed.characters)) characters=parsed.characters; }
+    }catch(e){ console.warn("Could not load saved data",e); }
+    characters=characters.filter(c=>c && typeof c==="object").map(normalizeCharacter);
+  }
+  function normalizeCharacter(c){
+    const out={...blankCharacter(),...c};
+    out.id=String(c.id||uid()); out.name=String(c.name||""); out.concept=String(c.concept||""); out.summary=String(c.summary||"");
+    out.appealElements=Array.isArray(c.appealElements)?c.appealElements.map(String).slice(0,12):["","",""];
+    groups.forEach(k=>out[k]=Array.isArray(c[k])?c[k].map(String):[]);
+    fields.forEach(k=>{
+      const key=k==="charName"?"name":k;
+      if(typeof out[key]!=="string") out[key]="";
+    });
+    out.createdAt=c.createdAt||new Date().toISOString(); out.updatedAt=c.updatedAt||out.createdAt;
+    return out;
+  }
+  function save(){
+    try{ localStorage.setItem(STORAGE_KEY,JSON.stringify({schemaVersion:1,characters})); $("#saveStatus").textContent="保存済み · "+new Date().toLocaleTimeString("ja-JP",{hour:"2-digit",minute:"2-digit"}); }
+    catch(e){ $("#saveStatus").textContent="保存できません。JSONに書き出してください"; showToast("ブラウザ内に保存できませんでした"); }
+  }
+  function showToast(msg){
+    const el=$("#toast"); el.textContent=msg; el.classList.add("show");
+    clearTimeout(toastTimer); toastTimer=setTimeout(()=>el.classList.remove("show"),2300);
+  }
+  function escapeHtml(s){ return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+  function renderList(){
+    const q=$("#searchInput").value.trim().toLocaleLowerCase();
+    const shown=characters.filter(c=>(c.name+" "+c.concept+" "+c.summary).toLocaleLowerCase().includes(q));
+    $("#characterCount").textContent=`${characters.length} characters`;
+    const host=$("#cardList");
+    if(!shown.length){
+      host.innerHTML=`<div class="empty" style="grid-column:1/-1"><div class="symbol">✧</div><strong>${characters.length?"見つかりませんでした":"まだキャラクターがいません"}</strong><span>${characters.length?"検索ワードを変えてみてね。":"「＋ 追加」から最初のキャラを作ろう。"}</span></div>`;
+      return;
+    }
+    host.innerHTML=shown.map(c=>{
+      const count=(c.appealElements||[]).filter(x=>String(x).trim()).length;
+      const filled=[c.concept,c.core,c.scenes,c.avoidDirections].filter(x=>String(x||"").trim()).length;
+      const updated=new Date(c.updatedAt||c.createdAt||Date.now());
+      const date=Number.isNaN(updated.getTime())?"":updated.toLocaleDateString("ja-JP",{month:"numeric",day:"numeric"});
+      return `<article class="character-card" data-card="${escapeHtml(c.id)}">
+        <div class="card-mark">✦</div><div class="card-main">
+          <div class="card-title">${escapeHtml(c.name||"名前未設定")}</div>
+          <p class="card-concept">${escapeHtml(c.summary||c.concept||"コンセプト未記入")}</p>
+          <div class="card-meta"><span class="pill green">メイン要素 ${count}件</span><span class="pill">${filled>=3?"記入あり":"記入途中"}</span>${date?`<span class="pill">${date}更新</span>`:""}</div>
+          <div class="card-actions">
+            <button class="btn btn-soft btn-small" data-action="edit" data-id="${escapeHtml(c.id)}">編集する　›</button>
+            <button class="btn btn-outline btn-small" data-action="duplicate" data-id="${escapeHtml(c.id)}">複製</button>
+            <button class="btn btn-outline btn-small" data-action="delete" data-id="${escapeHtml(c.id)}">削除</button>
+          </div>
+        </div>
+      </article>`;
+    }).join("");
+  }
+  function showView(view){
+    $("#listView").classList.toggle("hidden",view!=="list");
+    $("#editorView").classList.toggle("hidden",view!=="editor");
+    $("#dataView").classList.toggle("hidden",view!=="data");
+    $("#editorActions").classList.toggle("hidden",view!=="editor");
+    lastView=view;
+    window.scrollTo({top:0,behavior:"instant"});
+  }
+  function addCharacter(){
+    const c=blankCharacter(); characters.unshift(c); currentId=c.id; save(); renderList(); openEditor(c.id);
+  }
+  function openEditor(id){
+    const c=characters.find(x=>x.id===id); if(!c)return;
+    currentId=id;
+    fields.forEach(k=>{
+      const key=k==="charName"?"name":k;
+      const el=$("#"+k); if(el)el.value=c[key]||"";
+    });
+    renderRepeatRows("mainElements",c.appealElements||["","",""]);
+    groups.forEach(g=>{
+      $$(`[data-choice-group="${g}"] input`).forEach(el=>el.checked=(c[g]||[]).includes(el.value));
+    });
+    $("#editorHeading").textContent=c.name||"新しいキャラ";
+    $("#saveStatus").textContent="編集内容は自動保存されます";
+    showView("editor");
+  }
+  function renderRepeatRows(containerId,values){
+    const host=$("#"+containerId); host.innerHTML="";
+    (values.length?values:[""]).forEach((v,i)=>{
+      const row=document.createElement("div"); row.className="repeat-row";
+      row.innerHTML=`<input type="text" aria-label="メイン要素 ${i+1}" placeholder="例：普段は冷静なのに恋愛では不器用" value="${escapeHtml(v)}"><button class="remove-row" type="button" aria-label="この要素を削除">×</button>`;
+      row.querySelector("input").addEventListener("input",scheduleSave);
+      row.querySelector("button").addEventListener("click",()=>{
+        if($$(".repeat-row",host).length===1){row.querySelector("input").value="";}
+        else row.remove();
+        scheduleSave();
+      });
+      host.appendChild(row);
+    });
+  }
+  function readEditor(){
+    const c=characters.find(x=>x.id===currentId); if(!c)return;
+    fields.forEach(k=>{
+      const key=k==="charName"?"name":k; const el=$("#"+k); if(el)c[key]=el.value;
+    });
+    c.appealElements=$$(".repeat-row input",$("#mainElements")).map(el=>el.value.trim()).slice(0,12);
+    groups.forEach(g=>c[g]=$$(`[data-choice-group="${g}"] input:checked`).map(el=>el.value));
+    c.updatedAt=new Date().toISOString();
+    $("#editorHeading").textContent=c.name||"新しいキャラ";
+  }
+  function scheduleSave(){
+    $("#saveStatus").textContent="変更を保存中…";
+    clearTimeout(dirtyTimer);
+    dirtyTimer=setTimeout(()=>{readEditor();save();renderList();},250);
+  }
+  function flushSave(){clearTimeout(dirtyTimer);if(currentId){readEditor();save();}}
+  function openData(){flushSave();showView("data");}
+  function backToList(){flushSave();showView("list");renderList();}
+  function getCharacter(){flushSave();return characters.find(c=>c.id===currentId);}
+  function selectedValues(c, keys){return keys.flatMap(k=>(c[k]||[]).length?[`${groupLabels[k]}：${c[k].join("、")}`]:[]);}
+  const groupLabels={appearance:"外見",personality:"性格",romance:"恋愛表現",gap:"ギャップ",obsession:"執着・危うさ",relationship:"関係性・行動原理",vulnerability:"弱さ・人間臭さ",ability:"能力・社会的魅力"};
+  function buildOutput(c,appealOnly=false){
+    const lines=["メロさ‼️ CHARACTER SHEET"];
+    const add=(label,value)=>{if(value&&String(value).trim())lines.push(`【${label}】\n${String(value).trim()}`);};
+    add("キャラクター名",c.name);
+    if(!appealOnly){
+      add("基本コンセプト",c.concept); add("一覧用の一言",c.summary);
+    }
+    add("魅力の核",c.core);
+    const main=(c.appealElements||[]).filter(x=>x.trim());
+    if(main.length)add("メインのメロさ要素",main.map(x=>"・"+x).join("\n"));
+    const selected=selectedValues(c,groups);
+    if(selected.length) add("採用した属性",selected.map(x=>"・"+x).join("\n"));
+    if(!appealOnly){
+      add("外見の詳細",c.appearanceNotes);add("性格・価値観",c.personalityNotes);
+      add("このキャラらしい愛情表現",c.romanceNotes);add("ギャップが見える場面",c.gapNotes);
+      add("執着の発現条件・境界線",c.obsessionNotes);add("関係性・信念",c.relationshipNotes);
+      add("能力・仕事・信念",c.abilityNotes);add("弱さ・過去の扱い",c.vulnerabilityNotes);
+    }
+    add("具体的な行動・シーン",c.scenes);
+    add("条件付きで発現する魅力",c.conditions);
+    add("ギャップ・相乗効果",c.synergy);
+    add("避けたい方向性",c.avoidDirections);
+    if(!appealOnly)add("その他のメモ",c.notes);
+    return lines.length>1?lines.join("\n\n"): "メロさ‼️ CHARACTER SHEET\n\n（まだ記入されていません）";
+  }
+  async function copyText(text){
+    try{
+      if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);}
+      else{
+        const ta=document.createElement("textarea");ta.value=text;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();
+        const ok=document.execCommand("copy");ta.remove();if(!ok)throw new Error("copy failed");
+      }
+      showToast("コピーしました！");
+    }catch(e){showPreview(text,"コピーできませんでした。下の文章を長押ししてコピーしてください。");}
+  }
+  function showPreview(text,title="コピー用テキスト"){
+    $("#modalTitle").textContent=title;
+    $("#modalMessage").innerHTML=`<div class="preview" id="previewText" contenteditable="true" spellcheck="false"></div>`;
+    $("#previewText").textContent=text;
+    $("#modalActions").innerHTML=`<button class="btn btn-outline" id="closeModal">閉じる</button><button class="btn btn-primary" id="modalCopy">コピーする</button>`;
+    $("#modalBackdrop").classList.remove("hidden");
+    $("#closeModal").onclick=closeModal;
+    $("#modalCopy").onclick=()=>copyText($("#previewText").innerText);
+  }
+  function closeModal(){$("#modalBackdrop").classList.add("hidden");}
+  function confirmDialog(title,message,buttons){
+    $("#modalTitle").textContent=title;$("#modalMessage").textContent=message;
+    $("#modalActions").innerHTML="";
+    buttons.forEach(b=>{
+      const btn=document.createElement("button");btn.className="btn "+(b.primary?"btn-primary":"btn-outline");btn.textContent=b.label;
+      btn.onclick=()=>{closeModal();b.action();};$("#modalActions").appendChild(btn);
+    });
+    $("#modalBackdrop").classList.remove("hidden");
+  }
+  function duplicateCharacter(id){
+    const src=characters.find(c=>c.id===id);if(!src)return;
+    const copy=normalizeCharacter({...JSON.parse(JSON.stringify(src)),id:uid(),name:(src.name||"名前未設定")+"（コピー）",createdAt:new Date().toISOString(),updatedAt:new Date().toISOString()});
+    characters.unshift(copy);save();renderList();showToast("キャラを複製しました");
+  }
+  function deleteCharacter(id){
+    const c=characters.find(x=>x.id===id);if(!c)return;
+    confirmDialog("キャラを削除しますか？",`「${c.name||"名前未設定"}」を削除します。この操作は取り消せません。`,[
+      {label:"キャンセル",action:()=>{}},
+      {label:"削除する",primary:true,action:()=>{characters=characters.filter(x=>x.id!==id);if(currentId===id)currentId=null;save();renderList();showToast("削除しました");}}
+    ]);
+  }
+  function exportJson(){
+    flushSave();
+    const data={app:"メロさ‼️ CHARACTER SHEET",schemaVersion:1,exportedAt:new Date().toISOString(),characters};
+    const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+    const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=`mero-character-sheet-${new Date().toISOString().slice(0,10)}.json`;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+    showToast("JSONを書き出しました");
+  }
+  function importJson(){ $("#fileInput").click(); }
+  function processImport(data,mode){
+    let incoming=Array.isArray(data)?data:data&&Array.isArray(data.characters)?data.characters:null;
+    if(!incoming)throw new Error("JSON内にcharacters配列がありません");
+    incoming=incoming.filter(c=>c&&typeof c==="object").map(normalizeCharacter);
+    if(mode==="replace")characters=incoming;
+    else{
+      const ids=new Set(characters.map(c=>c.id));
+      incoming.forEach(c=>{if(ids.has(c.id))c.id=uid();ids.add(c.id);characters.push(c);});
+    }
+    save();renderList();showToast(`${incoming.length}件のキャラを読み込みました`);
+  }
+  $("#fileInput").addEventListener("change",async e=>{
+    const file=e.target.files[0];if(!file)return;
+    try{
+      const data=JSON.parse(await file.text());
+      confirmDialog("JSONを読み込みます",`ファイル内のキャラをどう読み込みますか？\n\nファイル：${file.name}\n件数：${Array.isArray(data)?data.length:Array.isArray(data.characters)?data.characters.length:"不明"}`,[
+        {label:"キャンセル",action:()=>{}},
+        {label:"既存に追加",action:()=>{try{processImport(data,"append");}catch(err){showToast("読み込み失敗："+err.message);}}},
+        {label:"すべて置き換え",primary:true,action:()=>{try{processImport(data,"replace");}catch(err){showToast("読み込み失敗："+err.message);}}}
+      ]);
+    }catch(err){showToast("JSONを読み込めません："+err.message);}
+    e.target.value="";
+  });
+  $("#addCharacter").addEventListener("click",addCharacter);
+  $("#backToList").addEventListener("click",backToList);
+  $("#openData").addEventListener("click",openData);
+  $("#backFromData").addEventListener("click",()=>{showView(lastView==="editor"?"editor":"list");renderList();});
+  $("#searchInput").addEventListener("input",renderList);
+  $("#cardList").addEventListener("click",e=>{
+    const btn=e.target.closest("[data-action]");if(btn){const id=btn.dataset.id;
+      if(btn.dataset.action==="edit")openEditor(id);
+      if(btn.dataset.action==="duplicate")duplicateCharacter(id);
+      if(btn.dataset.action==="delete")deleteCharacter(id);
+      return;
+    }
+    const card=e.target.closest("[data-card]");if(card)openEditor(card.dataset.card);
+  });
+  fields.forEach(k=>{const el=$("#"+k);if(el){el.addEventListener("input",scheduleSave);el.addEventListener("change",scheduleSave);}});
+  groups.forEach(g=>$$(`[data-choice-group="${g}"] input`).forEach(el=>el.addEventListener("change",scheduleSave)));
+  $$("[data-add-row]").forEach(btn=>btn.addEventListener("click",()=>{
+    const host=$("#"+btn.dataset.addRow);if($$(".repeat-row",host).length>=12){showToast("メイン要素は12件までです");return;}
+    const values=$$(".repeat-row input",host).map(el=>el.value);values.push("");renderRepeatRows(btn.dataset.addRow,values);scheduleSave();
+  }));
+  $("#copyAll").addEventListener("click",()=>{const c=getCharacter();if(c)copyText(buildOutput(c,false));});
+  $("#copyAppeal").addEventListener("click",()=>{const c=getCharacter();if(c)copyText(buildOutput(c,true));});
+  $("#previewButton").addEventListener("click",()=>{const c=getCharacter();if(c)showPreview(buildOutput(c,false));});
+  $("#exportJson").addEventListener("click",exportJson);
+  $("#importJson").addEventListener("click",importJson);
+  $("#modalBackdrop").addEventListener("click",e=>{if(e.target===$("#modalBackdrop"))closeModal();});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal();});
+  load();renderList();
+})();
+</script>
+</body>
+</html>
