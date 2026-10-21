@@ -503,3 +503,13 @@ main { width: min(1280px, calc(100% - 64px)); margin: 0 auto; }
 .character-banner .banner-sun {
   display: none;
 }
+
+/* DATA RELEASES card on the homepage */
+.releases-card { --resource-color: var(--cyan); background: linear-gradient(135deg, #173f59, #28143e 60%); }
+.releases-graphic { gap: 8px; background-image: linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px); background-size: 20px 20px; }
+.releases-graphic b, .releases-graphic i, .releases-graphic span { display: grid; place-items: center; width: 66px; height: 78px; border: 1px solid var(--cyan); color: var(--cyan); background: rgba(77,234,255,.1); font-size: .8rem; font-style: normal; font-weight: 1000; transform: rotate(-8deg); }
+.releases-graphic i { border-color: var(--pink); color: var(--pink); transform: translateY(8px) rotate(4deg); }
+.releases-graphic span { width: auto; height: auto; padding: 5px 8px; border-color: var(--lime); color: var(--bg); background: var(--lime); font-size: .65rem; transform: rotate(8deg); }
+@media (max-width: 620px) {
+  .releases-graphic b, .releases-graphic i { width: 58px; height: 66px; }
+}

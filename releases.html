@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#170c2b">
+  <meta name="description" content="創作ツールで使える追加JSONデータの配布ページ。各データの説明とGitHub Releasesへのリンクを掲載しています。">
+  <title>DATA RELEASES | sakoooz</title>
+  <link rel="stylesheet" href="./style.css">
+  <style>
+    .release-main { width: min(1000px, calc(100% - 40px)); margin: 0 auto; }
+    .release-hero { margin: 24px 0 0; padding: clamp(28px, 6vw, 64px); border: 1px solid var(--line); background: linear-gradient(120deg, #2d1748, #173f59); }
+    .release-kicker { margin: 0 0 12px; color: var(--cyan); font-size: .65rem; font-weight: 900; letter-spacing: .16em; }
+    .release-hero h1 { margin: 0; font-size: clamp(2.5rem, 8vw, 5.5rem); line-height: .95; letter-spacing: -.07em; }
+    .release-hero h1 span { color: var(--lime); }
+    .release-lead { max-width: 650px; margin: 20px 0 0; color: #e0d4e9; font-size: .9rem; line-height: 1.9; }
+    .release-section { padding: 44px 0 70px; }
+    .release-section h2 { margin: 0 0 8px; font-size: 1.35rem; }
+    .release-section-intro { margin: 0 0 22px; color: var(--muted); font-size: .8rem; }
+    .release-card { padding: 22px; margin: 14px 0; border: 1px solid var(--line); border-left: 4px solid var(--lime); background: var(--panel); }
+    .release-card-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
+    .release-card h3 { margin: 0; font-size: 1.15rem; }
+    .release-version { padding: 4px 8px; border: 1px solid var(--cyan); color: var(--cyan); font-size: .65rem; font-weight: 900; letter-spacing: .08em; }
+    .release-card p { margin: 12px 0; color: #e0d4e9; font-size: .82rem; line-height: 1.85; }
+    .release-meta { color: var(--muted); font-size: .68rem; }
+    .release-link { display: inline-flex; align-items: center; gap: 14px; margin-top: 8px; padding: 10px 14px; border: 1px solid var(--lime); color: var(--lime); text-decoration: none; font-size: .75rem; font-weight: 900; }
+    .release-link:hover { color: var(--bg); background: var(--lime); }
+    .release-note { padding: 16px 18px; border: 1px dashed var(--line); color: var(--muted); font-size: .75rem; line-height: 1.8; }
+    .release-back { display: inline-block; margin: 0 0 26px; color: var(--cyan); font-size: .75rem; text-decoration: none; }
+    @media (max-width: 620px) {
+      .release-main { width: calc(100% - 30px); }
+      .release-hero { margin-top: 14px; padding: 25px 18px; }
+      .release-lead { font-size: .8rem; }
+      .release-section { padding: 32px 0 48px; }
+      .release-card { padding: 17px; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">メインコンテンツへ</a>
+  <div class="page-noise" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="sakoooz トップページ">
+      <span class="brand-icon" aria-hidden="true">k<span>!</span></span>
+      <span class="brand-name">sakoooz<small>CREATIVE PLAYGROUND</small></span>
+    </a>
+    <nav class="top-nav" aria-label="メインナビゲーション">
+      <a href="./#tools">TOOLS</a>
+      <a href="./#library">ARCHIVE</a>
+      <a href="./releases.html" aria-current="page">DATA<span>↗</span></a>
+    </nav>
+  </header>
+
+  <main id="main" class="release-main">
+    <section class="release-hero" aria-labelledby="release-title">
+      <p class="release-kicker">CREATIVE TOOLBOX / DATA LIBRARY</p>
+      <h1 id="release-title">DATA<br><span>RELEASES.</span></h1>
+      <p class="release-lead">創作ツールで使える追加データの配布ページです。新しい性格タイプやキーワードなど、ツールの可能性を広げるJSONデータを、バージョンごとにまとめています。</p>
+    </section>
+
+    <section class="release-section" aria-labelledby="release-list-title">
+      <h2 id="release-list-title">AVAILABLE DATA</h2>
+      <p class="release-section-intro">各項目のリンクからGitHub Releasesを開き、添付ファイルをダウンロードしてください。</p>
+
+      <article class="release-card">
+        <div class="release-card-top">
+          <h3>性格の種｜性格タイプ追加データ</h3>
+          <span class="release-version">v1.0</span>
+        </div>
+        <p>「性格の種」で使用する性格タイプの追加データです。配布ファイルや更新内容はGitHub Releasesの説明欄で確認できます。</p>
+        <div class="release-meta">対象ツール：PERSONALITY SLOT · ファイル形式：JSON</div>
+        <a class="release-link" href="https://github.com/sakoooz/Mero/releases/tag/personality-data-v1.0" target="_blank" rel="noopener noreferrer">GitHub Releasesを開く <span>↗</span></a>
+      </article>
+
+      <div class="release-note">
+        <strong>新しいデータを追加するとき：</strong>
+        このページの <code>article class="release-card"</code> ブロックを複製し、データ名・バージョン・説明・GitHub ReleasesのURLを変更してください。JSON本体はGitHub Releasesに添付して管理できます。
+      </div>
+    </section>
+
+    <a class="release-back" href="./">← BACK TO CREATIVE PLAYGROUND</a>
+  </main>
+
+  <footer class="site-footer">
+    <a class="footer-brand" href="./"><span class="brand-icon">k<span>!</span></span> かえる大根</a>
+    <p>MADE WITH <span>♥</span> FOR CREATIVE MINDS.</p>
+    <a href="#main" class="back-to-top">BACK TO TOP ↑</a>
+  </footer>
+</body>
+</html>
