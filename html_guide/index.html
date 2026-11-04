@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#170c2b">
+  <meta name="description" content="Talelynxの作品紹介ページを作るためのHTML・CSS仕様書。AI向け制作ガイドと、人間向け早見表を配布しています。">
+  <title>TALELYNX HTML GUIDE | sakoooz</title>
+  <link rel="icon" href="../assets/favicon.png" type="image/png">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .guide-hero { margin: 28px 0 0; padding: clamp(28px, 6vw, 64px); border: 1px solid var(--line); background: linear-gradient(120deg, #2d164b, #211039 65%, #173e50); position: relative; overflow: hidden; }
+    .guide-hero::after { content: "</>"; position: absolute; right: 5%; top: 8%; color: rgba(77,234,255,.12); font-size: clamp(5rem, 17vw, 13rem); font-weight: 1000; letter-spacing: -.1em; line-height: 1; }
+    .guide-hero-content { position: relative; z-index: 1; max-width: 720px; }
+    .guide-kicker { margin: 0 0 15px; color: var(--cyan); font-size: .62rem; font-weight: 900; letter-spacing: .18em; }
+    .guide-hero h1 { margin: 0; font-size: clamp(2.6rem, 7vw, 6rem); line-height: .92; letter-spacing: -.075em; }
+    .guide-hero h1 span { color: var(--lime); }
+    .guide-lead { max-width: 620px; margin: 22px 0 0; color: #e5d9f2; font-size: .88rem; line-height: 1.9; }
+    .guide-section { padding: clamp(48px, 7vw, 76px) 0; border-bottom: 1px solid var(--line); }
+    .guide-section .section-heading { margin-bottom: 22px; }
+    .guide-intro { max-width: 760px; color: var(--muted); font-size: .82rem; line-height: 2; }
+    .guide-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 28px; }
+    .guide-card { --guide-color: var(--lime); display: flex; min-width: 0; flex-direction: column; padding: 22px; border: 1px solid var(--line); background: linear-gradient(145deg, #2d4b3b, #24153d 68%); text-decoration: none; transition: transform .2s ease, border-color .2s ease; }
+    .guide-card:hover { transform: translateY(-5px); border-color: var(--guide-color); }
+    .guide-card.ai { --guide-color: var(--pink); background: linear-gradient(145deg, #542044, #28143e 68%); }
+    .guide-card.human { --guide-color: var(--cyan); background: linear-gradient(145deg, #173f59, #24153d 68%); }
+    .guide-card-top { display: flex; justify-content: space-between; gap: 12px; color: var(--muted); font-size: .56rem; font-weight: 900; letter-spacing: .12em; }
+    .guide-card-mark { display: grid; place-items: center; width: 76px; height: 76px; margin: 28px 0 24px; border: 1px solid var(--guide-color); color: var(--guide-color); font-size: 1.45rem; font-weight: 1000; letter-spacing: -.08em; box-shadow: 7px 7px 0 rgba(0,0,0,.18); transform: rotate(-5deg); }
+    .guide-card h3 { margin: 0; font-size: 1.35rem; line-height: 1.4; }
+    .guide-card-en { margin: 4px 0 0; color: var(--muted); font-size: .58rem; font-weight: 900; letter-spacing: .1em; }
+    .guide-card-desc { flex: 1; margin: 15px 0 22px; color: #e0d4e9; font-size: .76rem; line-height: 1.9; }
+    .guide-card-meta { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 18px; }
+    .guide-chip { padding: 4px 8px; border: 1px solid rgba(255,255,255,.22); color: var(--muted); font-size: .55rem; }
+    .guide-download { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 13px; border-top: 1px solid var(--line); color: var(--guide-color); font-size: .62rem; font-weight: 1000; letter-spacing: .1em; }
+    .guide-note { margin-top: 20px; padding: 16px 18px; border-left: 3px solid var(--yellow); background: rgba(255,228,91,.07); color: var(--muted); font-size: .72rem; line-height: 1.9; }
+    .guide-note strong { color: var(--yellow); }
+    .guide-back { display: inline-flex; align-items: center; gap: 12px; margin-top: 26px; padding: 10px 14px; border: 1px solid var(--cyan); color: var(--cyan); text-decoration: none; font-size: .65rem; font-weight: 900; letter-spacing: .08em; }
+    .guide-back:hover { color: var(--bg); background: var(--cyan); }
+    @media (max-width: 620px) {
+      .guide-hero { margin-top: 14px; padding: 28px 20px; }
+      .guide-hero h1 { font-size: clamp(2.5rem, 13vw, 4.2rem); }
+      .guide-lead { font-size: .78rem; }
+      .guide-cards { grid-template-columns: 1fr; gap: 12px; }
+      .guide-card { padding: 18px; }
+      .guide-card-mark { width: 64px; height: 64px; margin: 22px 0 20px; }
+    }
+  </style>
+  <meta property="og:title" content="TALELYNX HTML GUIDE | sakoooz">
+  <meta property="og:description" content="Talelynx作品紹介ページのHTML・CSS制作仕様書を配布しています。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sakoooz.github.io/html_guide/index.html">
+  <meta property="og:site_name" content="sakoooz | CREATIVE PLAYGROUND">
+</head>
+<body>
+  <a class="skip-link" href="../index.html#main">メインコンテンツへ</a>
+  <div class="page-noise" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="brand" href="../index.html" aria-label="sakoooz トップページ">
+      <span class="brand-icon" aria-hidden="true">k<span>!</span></span>
+      <span class="brand-name">sakoooz<small>CREATIVE PLAYGROUND</small></span>
+    </a>
+    <nav class="top-nav" aria-label="メインナビゲーション">
+      <a href="../index.html#tools">TOOLS</a>
+      <a href="../index.html#library">ARCHIVE</a>
+      <a href="../releases.html">DATA RELEASES<span>↗</span></a>
+    </nav>
+    <span class="header-status"><i></i> OPEN FOR IDEAS</span>
+  </header>
+
+  <main id="main">
+    <section class="guide-hero">
+      <div class="guide-hero-content">
+        <p class="guide-kicker"><span class="live-dot"></span> TALELYNX / HTML &amp; CSS RESOURCE</p>
+        <h1>BUILD YOUR<br><span>INTRO PAGE.</span></h1>
+        <p class="guide-lead">Talelynxの作品紹介ページを制作するときに使える、HTML・CSSの仕様書を公開しています。実機で表示を確認した内容をもとに、AIに制作を依頼するときのガイドと、自分で編集するときに参照できる早見表をまとめました。</p>
+      </div>
+    </section>
+
+    <section class="guide-section">
+      <div class="section-heading">
+        <div class="heading-title">
+          <span class="section-number">01 / DOWNLOAD</span>
+          <h2>CHOOSE YOUR<br><span>GUIDE.</span></h2>
+        </div>
+        <p>用途に合わせて、<br>必要な資料をどうぞ。</p>
+      </div>
+      <p class="guide-intro">どちらもTalelynxの作品紹介ページ向けの資料です。AIにHTMLを書いてもらう場合は「AI向け制作ガイド」、自分でタグや装飾を確認しながら作る場合は「人間向け早見表」を利用してください。</p>
+
+      <div class="guide-cards">
+        <a class="guide-card ai" href="./Talelynx_HTML制作仕様書_AI用.md" download>
+          <span class="guide-card-top"><span>DOCUMENT / 01</span><span>FOR AI</span></span>
+          <span class="guide-card-mark" aria-hidden="true">AI</span>
+          <h3>HTML制作仕様書</h3>
+          <p class="guide-card-en">AI PRODUCTION GUIDE</p>
+          <p class="guide-card-desc">Talelynxの仕様に沿ったHTMLをAIに作ってもらうための指示書。使用可能なタグ・CSS、禁止事項、注意点、コピペ用の部品を整理しています。</p>
+          <span class="guide-card-meta"><span class="guide-chip">AIへの指示に使う</span><span class="guide-chip">Markdown</span></span>
+          <span class="guide-download"><span>DOWNLOAD AI GUIDE (.MD)</span><span>↓</span></span>
+        </a>
+
+        <a class="guide-card human" href="./Talelynx_HTML_CSS早見表.md" download>
+          <span class="guide-card-top"><span>DOCUMENT / 02</span><span>FOR CREATORS</span></span>
+          <span class="guide-card-mark" aria-hidden="true">Aa</span>
+          <h3>HTML・CSS 早見表</h3>
+          <p class="guide-card-en">HUMAN QUICK REFERENCE</p>
+          <p class="guide-card-desc">使えるタグやCSS、使えない指定と代替方法を一覧で確認できる資料。制作中に仕様を調べたいときの手元用リファレンスです。</p>
+          <span class="guide-card-meta"><span class="guide-chip">自分で編集するときに</span><span class="guide-chip">Markdown</span></span>
+          <span class="guide-download"><span>DOWNLOAD QUICK REFERENCE (.MD)</span><span>↓</span></span>
+        </a>
+      </div>
+
+      <div class="guide-note"><strong>ご利用前に：</strong>仕様は2026年11月4日時点で、デスクトップとiPhoneで表示を確認した内容です。Androidでの表示は未確認です。資料に記載のないタグやCSSは、動作を保証していません。</div>
+      <a class="guide-back" href="../index.html">← BACK TO CREATIVE PLAYGROUND</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="footer-brand" href="../index.html"><span class="brand-icon">k<span>!</span></span> かえる大根</a>
+    <p>MADE WITH <span>♥</span> FOR CREATIVE MINDS.</p>
+    <a href="./index.html" class="back-to-top">BACK TO TOP ↑</a>
+  </footer>
+</body>
+</html>
