@@ -9,20 +9,18 @@
    ========================================================= */
 
 :root {
-  --bg: #fff9f0;
-  --text: #1c1633;
-  --muted: #5c5573;
+  --bg: #efe5e5;
+  --text: #231a3a;
+  --muted: #5d5473;
   --panel: #ffffff;
-  --line: rgba(28, 22, 51, .12);
-  --card-ink: #1c1633;      /* カード上の文字色（カードの色が明るいので固定） */
+  --line: rgba(35, 26, 58, .12);
+  --card-ink: #231a3a;      /* カード上の文字色（カードの色が明るいので固定） */
 
-  --coral:  #ff7a59;
-  --yellow: #ffd43b;
-  --pink:   #ff9ec4;
-  --sky:    #6cb8ff;
-  --lilac:  #b9a2ff;
-  --mint:   #5fe3a1;
-  --peach:  #ffb566;
+  /* パステルポップ：この4色だけで構成します */
+  --pink:   #db6842;
+  --yellow: #F5B700;
+  --mint:   #28a496;
+  --violet: #5a8ce8;
 
   --radius: 28px;
   --gap: 16px;
@@ -92,7 +90,7 @@ img { max-width: 100%; height: auto; }
   line-height: 1.25; letter-spacing: .01em;
 }
 .hero h1 mark {
-  background: linear-gradient(transparent 60%, var(--yellow) 60%);
+  background: linear-gradient(transparent 60%, var(--pink) 60%);
   color: inherit; padding: 0 .1em; white-space: nowrap;
 }
 .hero p { margin: 0; color: var(--muted); font-size: 1.05rem; }
@@ -118,7 +116,7 @@ img { max-width: 100%; height: auto; }
 
 /* ---------- カード共通 ---------- */
 .card {
-  --c: var(--coral);
+  --c: var(--pink);
   position: relative;
   display: flex; flex-direction: column; gap: 8px;
   background: var(--c);
@@ -170,6 +168,10 @@ img { max-width: 100%; height: auto; }
 .cards-sm { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
 .cards-sm .card { min-height: 190px; padding: 20px; }
 .cards-sm .card-icon { width: 44px; height: 44px; font-size: 1.3rem; }
+/* ライブラリは「同じ色の薄い版」にして、ツール（濃い色）との優先度を分ける */
+.cards-sm .card { background: #fff; background: color-mix(in srgb, var(--c) 30%, #fff); }
+.cards-sm .card .card-icon { background: var(--c); }
+.cards-sm .card .card-tag { background: rgba(255,255,255,.75); }
 
 /* 準備中（リンクなし） */
 .card-soon {
@@ -184,7 +186,7 @@ img { max-width: 100%; height: auto; }
 
 /* ---------- パネル（リンクではない情報ブロック） ---------- */
 .panel {
-  --c: var(--mint);
+  --c: var(--pink);
   background: var(--panel);
   background: color-mix(in srgb, var(--c) 24%, var(--panel));
   border-radius: var(--radius);
@@ -221,13 +223,10 @@ img { max-width: 100%; height: auto; }
 
 /* ---------- 色クラス（カード・ヒーロー・パネルに付けるだけ） ----------
    ※ .card / .page-hero / .panel の既定色より後に書く必要があるので、この位置に置いています */
-.c-coral  { --c: var(--coral); }
-.c-yellow { --c: var(--yellow); }
 .c-pink   { --c: var(--pink); }
-.c-sky    { --c: var(--sky); }
-.c-lilac  { --c: var(--lilac); }
+.c-yellow { --c: var(--yellow); }
 .c-mint   { --c: var(--mint); }
-.c-peach  { --c: var(--peach); }
+.c-violet { --c: var(--violet); }
 
 /* ---------- フッター ---------- */
 .site-footer { margin-top: 48px; padding: 28px 0 40px; border-top: 2px solid var(--line); }
